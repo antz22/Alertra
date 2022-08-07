@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Feed extends StatelessWidget {
-  const Feed({Key? key}) : super(key: key);
+class News extends StatelessWidget {
+  const News({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: const Center(
-          child: Text('Feed'),
-        ),
+        child: const Text('News'),
       ),
     );
   }

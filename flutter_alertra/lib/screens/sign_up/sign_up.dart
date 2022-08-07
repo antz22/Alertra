@@ -1,4 +1,5 @@
 import 'package:flutter_alertra/constants/constants.dart';
+import 'package:flutter_alertra/screens/login/login.dart';
 import 'package:flutter_alertra/screens/student/home/student_home_page.dart';
 import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
 import 'package:flutter_alertra/services/authentication_service.dart';
@@ -53,56 +54,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Spacer(),
-          Column(
-            children: [
-              SvgPicture.asset('assets/svgs/logo.svg'),
-            ],
-          ),
-          const Spacer(),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 2 * kDefaultPadding),
-            decoration: const BoxDecoration(),
-            child: Column(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            Color(0xFF13233A),
+            Color(0xFF3C506D),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Spacer(),
+            Column(
               children: [
-                CustomTextField(
-                  hintText: 'Username',
-                  controller: usernameController,
-                ),
-                const SizedBox(height: kDefaultPadding),
-                CustomTextField(
-                  hintText: 'Password',
-                  controller: passwordController,
-                ),
-                const SizedBox(height: kDefaultPadding),
-                CustomTextField(
-                  hintText: 'Role',
-                  controller: roleController,
-                ),
-                const SizedBox(height: kDefaultPadding),
-                CustomTextField(
-                  hintText: 'School',
-                  controller: schoolController,
-                ),
+                Image.asset('assets/images/alertra_white_text_logo.png'),
               ],
             ),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () => _register(),
-            child: const CustomButton(
-              purpose: 'other',
-              text: 'REGISTER',
-              fit: 'normal',
+            const Spacer(),
+            Container(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 2 * kDefaultPadding),
+              decoration: const BoxDecoration(),
+              child: Column(
+                children: [
+                  CustomTextField(
+                    hintText: 'Username',
+                    controller: usernameController,
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  CustomTextField(
+                    hintText: 'Password',
+                    controller: passwordController,
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  CustomTextField(
+                    hintText: 'Role',
+                    controller: roleController,
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  CustomTextField(
+                    hintText: 'School',
+                    controller: schoolController,
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Spacer(),
-        ],
+            const Spacer(),
+            GestureDetector(
+              onTap: () => _register(),
+              child: const CustomButton(
+                purpose: 'other',
+                text: 'REGISTER',
+                fit: 'normal',
+              ),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Log in',
+                style: TextStyle(
+                  color: Color(0xFF9F9F9F),
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }

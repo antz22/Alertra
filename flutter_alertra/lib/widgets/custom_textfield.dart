@@ -17,18 +17,37 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      cursorColor: const Color(0xFFBEC3CD),
       obscureText: hintText.contains('Password') ? true : false,
+      style: const TextStyle(
+        color: Color(0xFFBEC3CD),
+        fontSize: 16,
+      ),
       decoration: InputDecoration(
-        hintText: hintText,
-        filled: true,
-        fillColor: const Color(0xFFEEEEEE),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.0),
-          borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+        hintStyle: const TextStyle(
+          color: Color(0xFFBEC3CD),
+          fontSize: 16,
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.0),
-          borderSide: const BorderSide(width: 2, color: kPrimaryColor),
+        hintText: hintText,
+        filled: false,
+        icon: hintText.contains('Password')
+            ? const Icon(
+                Icons.lock,
+                color: Color(0xFFBEC3CD),
+              )
+            : const Icon(
+                Icons.email,
+                color: Color(0xFFBEC3CD),
+              ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFFBEC3CD),
+          ),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFFBEC3CD),
+          ),
         ),
       ),
       keyboardType: verbose ? TextInputType.multiline : TextInputType.text,

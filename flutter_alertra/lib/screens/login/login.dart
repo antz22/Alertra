@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
+import 'package:flutter_alertra/screens/sign_up/sign_up.dart';
 import 'package:flutter_alertra/screens/student/home/student_home_page.dart';
 import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
 import 'package:flutter_alertra/services/authentication_service.dart';
@@ -104,12 +105,58 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: kDefaultPadding),
             GestureDetector(
               onTap: () {
-                print(usernameController.text);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignUpScreen(),
+                  ),
+                );
               },
               child: const Text(
-                'Forgot Password?',
+                'Create an account',
                 style: TextStyle(
-                  color: Color(0xFF9F9F9F),
+                  color: Color(0xFFBEC3CD),
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+            // ================================================
+            // ================================================
+            // ======== ONLY FOR DEVELOPMENT PURPOSE ==========
+            // ================================================
+            // ================================================
+            const SizedBox(height: kDefaultPadding),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const StudentHomePage(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Student Home Page',
+                style: TextStyle(
+                  color: Color(0xFFBEC3CD),
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TeacherHomePage(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Teacher Home Page',
+                style: TextStyle(
+                  color: Color(0xFFBEC3CD),
                   fontSize: 15.0,
                 ),
               ),
