@@ -7,7 +7,7 @@ selenium
 urlparser
 numpy
 pandas
-skleran
+sklearn
 nltk
 pygooglenews
 Footer
