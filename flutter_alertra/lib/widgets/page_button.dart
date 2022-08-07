@@ -17,12 +17,11 @@ class PageButton extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
           ),
         ),
         const Text(
           "•",
-          style: TextStyle(fontSize: 20, color: Colors.grey),
+          style: TextStyle(fontSize: 20),
         ),
       ],
     );

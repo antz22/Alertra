@@ -38,6 +38,10 @@ class TeacherHomePage extends StatelessWidget {
                 splashColor: Colors.transparent,
                 labelStyle: const TextStyle(
                   fontWeight: FontWeight.w900,
+                  // color: Colors.red
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  color: Colors.grey
                 ),
                 radius: 4,
                 height: 53,
@@ -59,7 +63,7 @@ class TeacherHomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const Divider(height: 16, thickness: 3),
+              const Divider(height: 16, thickness: 2),
               const Expanded(
                 child: TabBarView(
                   children: <Widget>[
