@@ -1,0 +1,168 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "montyHacks2022",
+            "cwd": "Users/azamahmed/montyHacks2022",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "montyHacks2022 (profile mode)",
+            "cwd": "Users/azamahmed/montyHacks2022",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "montyHacks2022 (release mode)",
+            "cwd": "Users/azamahmed/montyHacks2022",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "app",
+            "cwd": "Users/azamahmed/Dev/app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "app (profile mode)",
+            "cwd": "Users/azamahmed/Dev/app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "app (release mode)",
+            "cwd": "Users/azamahmed/Dev/app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "ai_land",
+            "cwd": "Users/azamahmed/IdeaProjects/ai_land",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "ai_land (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/ai_land",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "ai_land (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/ai_land",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "durian",
+            "cwd": "Users/azamahmed/IdeaProjects/durian",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "durian (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/durian",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "durian (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/durian",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_app",
+            "cwd": "Users/azamahmed/IdeaProjects/flutter_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_app (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/flutter_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_app (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/flutter_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "laconic_text",
+            "cwd": "Users/azamahmed/IdeaProjects/laconic_text",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "laconic_text (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/laconic_text",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "laconic_text (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/laconic_text",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "neuracode_app",
+            "cwd": "Users/azamahmed/IdeaProjects/neuracode_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "neuracode_app (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/neuracode_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "neuracode_app (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/neuracode_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "stemey_app",
+            "cwd": "Users/azamahmed/IdeaProjects/stemey_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "stemey_app (profile mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/stemey_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "stemey_app (release mode)",
+            "cwd": "Users/azamahmed/IdeaProjects/stemey_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
