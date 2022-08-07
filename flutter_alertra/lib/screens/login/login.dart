@@ -54,54 +54,68 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 0.125 * MediaQuery.of(context).size.height),
-          Column(
-            children: [
-              SvgPicture.asset('assets/svgs/logo.svg'),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-                horizontal: 2 * kDefaultPadding, vertical: 4 * kDefaultPadding),
-            decoration: const BoxDecoration(),
-            child: Column(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            Color(0xFF13233A),
+            Color(0xFF3C506D),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 0.125 * MediaQuery.of(context).size.height),
+            Column(
               children: [
-                CustomTextField(
-                  hintText: 'Username',
-                  controller: usernameController,
-                ),
-                const SizedBox(height: kDefaultPadding),
-                CustomTextField(
-                  hintText: 'Password',
-                  controller: passwordController,
-                ),
+                Image.asset('assets/images/alertra_white_text_logo.png'),
               ],
             ),
-          ),
-          GestureDetector(
-            onTap: () => _signIn(),
-            child: const CustomButton(
-                purpose: 'other', text: 'LOGIN', fit: 'normal'),
-          ),
-          const SizedBox(height: kDefaultPadding),
-          GestureDetector(
-            onTap: () {
-              print(usernameController.text);
-            },
-            child: const Text(
-              'Forgot Password?',
-              style: TextStyle(
-                color: Color(0xFF9F9F9F),
-                fontSize: 15.0,
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 2 * kDefaultPadding,
+                  vertical: 4 * kDefaultPadding),
+              decoration: const BoxDecoration(),
+              child: Column(
+                children: [
+                  CustomTextField(
+                    hintText: 'Username',
+                    controller: usernameController,
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  CustomTextField(
+                    hintText: 'Password',
+                    controller: passwordController,
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            GestureDetector(
+              onTap: () => _signIn(),
+              child: const CustomButton(
+                  purpose: 'other', text: 'LOG IN', fit: 'normal'),
+            ),
+            const SizedBox(height: kDefaultPadding),
+            GestureDetector(
+              onTap: () {
+                print(usernameController.text);
+              },
+              child: const Text(
+                'Forgot Password?',
+                style: TextStyle(
+                  color: Color(0xFF9F9F9F),
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -17,7 +17,15 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: purpose == 'warning' ? const Color(0xFFE30000) : kPrimaryColor,
+        // color: purpose == 'warning' ? const Color(0xFFE30000) : kPrimaryColor,
+        gradient: const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color(0xFF03EAFD),
+            Color(0xFF4AB1FC),
+          ],
+        ),
         borderRadius: BorderRadius.circular(5.0),
         boxShadow: [
           kBoxShadow(),
