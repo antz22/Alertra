@@ -77,6 +77,7 @@ class AlertList(APIView):
 
 # webscraper function to find report search results
 def webscrape(town, incident):
+    # TODO fix this
     os.environ['MOZ_HEADLESS'] = '1'
     driver = webdriver.Firefox()
 
