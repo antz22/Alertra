@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
+import 'package:flutter_alertra/screens/main/feed/create_report.dart';
+import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
 
 class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
@@ -82,9 +84,22 @@ class Feed extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: kDefaultPadding,),
+          const SizedBox(
+            height: kDefaultPadding,
+          ),
           const Text('Reports', style: TextStyle(fontSize: 18)),
-          Spacer()
+          const Spacer(),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateReport(),
+                ),
+              );
+            },
+            child: const Text('Create Report'),
+          ),
         ],
       ),
     );

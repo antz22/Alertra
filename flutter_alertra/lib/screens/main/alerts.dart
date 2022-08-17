@@ -5,9 +5,12 @@ class Alerts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: const Text('Alerts'),
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Text('hello')
+        ],
       ),
     );
   }

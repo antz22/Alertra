@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
 import 'package:flutter_alertra/screens/main/alerts.dart';
-import 'package:flutter_alertra/screens/main/feed.dart';
+import 'package:flutter_alertra/screens/main/feed/feed.dart';
 import 'package:flutter_alertra/screens/main/news.dart';
 import 'package:flutter_alertra/widgets/page_button.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
