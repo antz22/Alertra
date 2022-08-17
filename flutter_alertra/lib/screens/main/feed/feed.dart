@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
 import 'package:flutter_alertra/screens/main/feed/create_report.dart';
+import 'package:flutter_alertra/screens/main/alert_info.dart';
 import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
 
 class Feed extends StatelessWidget {
@@ -50,34 +51,44 @@ class Feed extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                Material(
-                  elevation: 16,
-                  shadowColor: Color.fromARGB(255, 255, 170, 170),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ListTile(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AlertInfo(),
+                      ),
+                    );
+                  },
+                  child: Material(
+                    elevation: 16,
+                    shadowColor: const Color.fromARGB(255, 255, 170, 170),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 8.0,
-                    ),
-                    tileColor: Colors.white,
-                    leading: const Icon(
-                      Icons.person,
-                      color: Colors.black,
-                    ),
-                    title: const Text(
-                      'Gamer causes lighting storm, dies instantly',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: const Text(
-                        'Imposter on the run at 50 Fortnite drive, please take caution.'),
-                    trailing: const Text(
-                      '11:21 am',
-                      style: TextStyle(color: Colors.grey),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
+                      tileColor: Colors.white,
+                      leading: const Icon(
+                        Icons.person,
+                        color: Colors.black,
+                      ),
+                      title: const Text(
+                        'Gamer causes lighting storm, dies instantly',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: const Text(
+                          'Imposter on the run at 50 Fortnite drive, please take caution.'),
+                      trailing: const Text(
+                        '11:21 am',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ),
                 )
