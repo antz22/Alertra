@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocode/geocode.dart';
 
-class CreateReport extends StatelessWidget {
-  CreateReport({Key? key, this.selectedEmergencyType}) : super(key: key);
+class CreateReport extends StatefulWidget {
+  CreateReport({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<CreateReport> createState() => _CreateReportState();
+}
+
+class _CreateReportState extends State<CreateReport> {
   final List<String> emergencyTypeItems = [
     'Suspicious Individual',
     'Harassment',
     'Bullying',
     'Substance Abuse',
-    'Animal Sighting'
-        'Violence',
-    'Bad Weather'
-        'Accident',
+    'Animal Sighting',
+    'Violence',
+    'Bad Weather',
+    'Accident',
     'Missing Person',
   ];
 
+  final List<String> alertEmergencyItems = [
+    'Low',
+    'Medium',
+    'High',
+  ];
+
+  String? _address;
   String? selectedEmergencyType;
   String? selectedUrgencyType;
 
@@ -45,56 +61,53 @@ class CreateReport extends StatelessWidget {
           children: [
             const Text('What is the type of your emergency?'),
             const SizedBox(height: 10),
-            Container(
-              // margin: const EdgeInsets.only(right: 20),
-              child: DropdownButtonFormField2(
-                decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                isExpanded: true,
-                hint: const Text(
-                  'Select',
-                  style: TextStyle(fontSize: 14),
-                ),
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black45,
-                ),
-                iconSize: 30,
-                buttonHeight: 50,
-                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-                dropdownDecoration: BoxDecoration(
+            DropdownButtonFormField2(
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                items: emergencyTypeItems
-                    .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Please select the emergency type.';
-                  }
-                },
-                onChanged: (value) {
-                  //Do something when changing the item if you want.
-                },
-                onSaved: (value) {
-                  selectedEmergencyType = value.toString();
-                },
+                filled: true,
+                fillColor: Colors.white,
               ),
+              isExpanded: true,
+              hint: const Text(
+                'Select',
+                style: TextStyle(fontSize: 14),
+              ),
+              icon: const Icon(
+                Icons.arrow_drop_down,
+                color: Colors.black45,
+              ),
+              iconSize: 30,
+              buttonHeight: 50,
+              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              items: emergencyTypeItems
+                  .map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select the emergency type.';
+                }
+              },
+              onChanged: (value) {
+                //Do something when changing the item if you want.
+              },
+              onSaved: (value) {
+                selectedEmergencyType = value.toString();
+              },
             ),
             const SizedBox(height: 20),
             const Text('Description'),
@@ -126,7 +139,86 @@ class CreateReport extends StatelessWidget {
             const SizedBox(height: 20),
             const Text('Alert Urgency'),
             const SizedBox(height: 10),
-            
+            DropdownButtonFormField2(
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              isExpanded: true,
+              hint: const Text(
+                'Select',
+                style: TextStyle(fontSize: 14),
+              ),
+              icon: const Icon(
+                Icons.arrow_drop_down,
+                color: Colors.black45,
+              ),
+              iconSize: 30,
+              buttonHeight: 50,
+              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              items: alertEmergencyItems
+                  .map(
+                    (item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select the emergency level.';
+                }
+              },
+              onChanged: (value) {
+                //Do something when changing the item if you want.
+              },
+              onSaved: (value) {
+                setState(() {
+                  selectedUrgencyType = value.toString();
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                LocationPermission permission;
+                permission = await Geolocator.requestPermission();
+
+                Position position = await Geolocator.getCurrentPosition(
+                  desiredAccuracy: LocationAccuracy.high,
+                );
+
+                // var altitude = position.altitude;
+                // var floor = position.floor;
+                // var latitude = position.latitude;
+                // var longitude = position.longitude;
+
+                GeoCode geoCode = GeoCode();
+                var address = await geoCode.reverseGeocoding(
+                    latitude: position.latitude, longitude: position.longitude);
+
+                var fullAddress =
+                    '${address.streetNumber} ${address.streetAddress}, ${address.city}, ${address.region}, ${address.postal}';
+
+                setState(() {
+                  _address = fullAddress;
+                });
+              },
+              child: const Text('Get current location'),
+            ),
+            Text(_address != null ? _address! : "None"),
           ],
         ),
       ),

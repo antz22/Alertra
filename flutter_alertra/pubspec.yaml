@@ -26,6 +26,8 @@ dependencies:
   url_launcher: ^6.0.9
   buttons_tabbar: ^1.3.6
   dropdown_button2: ^1.7.2
+  geolocator: ^9.0.1
+  geocode: ^1.0.2
 
 dev_dependencies:
   flutter_test:
