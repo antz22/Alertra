@@ -1,17 +1,12 @@
-from django.shortcuts import render
-
 from rest_framework import status, authentication, permissions
 from rest_framework.decorators import api_view, authentication_classes,permission_classes
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Report, ReportSearchResult, ReportType, Alert, School, Source, KeyWord
 from .serializers import ReportSerializer, ReportTypeSerializer, AlertSerializer, UserDataSerializer, SchoolSerializer
 
-import numpy as np 
 import pandas as pd 
-import matplotlib.pyplot as plt
 from sklearn.feature_extraction import text
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
@@ -20,20 +15,8 @@ from nltk.stem.snowball import SnowballStemmer
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-import time
-import csv
-from urllib.parse import urlparse
 import os
-import csv
-import sys
 
-from pygooglenews import GoogleNews
-
-# Creating the lists of the django models
 
 class ReportList(APIView):
     authentication_classes = [authentication.TokenAuthentication]
@@ -108,13 +91,6 @@ def createData(filePath, headlines):
         lstReturnData.append([index, headline])
 
     return lstReturnData
-    # with open(filePath, 'w', newline='') as file:
-    #     writer = csv.writer(file)
-    #     writer.writerow(["index", "headline_text"])
-    #     for index, headline in enumerate(headlines):
-    #         writer.writerow([index, headline])
-
-
 
 # Find safety related news for given city and state from Google News
 def findSafetyNews(strCity, strState):
