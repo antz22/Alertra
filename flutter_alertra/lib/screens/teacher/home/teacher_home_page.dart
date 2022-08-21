@@ -40,9 +40,7 @@ class TeacherHomePage extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                   // color: Colors.red
                 ),
-                unselectedLabelStyle: const TextStyle(
-                  color: Colors.grey
-                ),
+                unselectedLabelStyle: const TextStyle(color: Colors.grey),
                 radius: 4,
                 height: 53,
                 tabs: const [
@@ -67,7 +65,7 @@ class TeacherHomePage extends StatelessWidget {
               const Expanded(
                 child: TabBarView(
                   children: <Widget>[
-                    Feed(),
+                    Feed(role: "Teacher"),
                     Alerts(),
                     News(),
                   ],

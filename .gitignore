@@ -1,2 +1,3 @@
 .vscode
 django_alertra/db.sqlite3
+**__pycache__**

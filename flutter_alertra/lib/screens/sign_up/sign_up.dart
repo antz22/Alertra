@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final passwordController = TextEditingController();
   final roleController = TextEditingController();
   final schoolController = TextEditingController();
+  var errText = "";
+  var err = false;
 
   _register() async {
     Map data = await context.read<AuthenticationService>().registerUser(
@@ -33,6 +35,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         data['statusCode'] != '201') {
       String key = data['body'].keys.elementAt(0);
       print(data['body'][key][0]!);
+      setState(() {
+        err = true;
+        errText = data['body'][key][0];
+      });
     } else {
       if (roleController.text == 'Teacher') {
         Navigator.push(
@@ -78,6 +84,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
             const Spacer(),
+            err
+                ? Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 2 * kDefaultPadding),
+                    child: Column(
+                      children: [
+                        Text(
+                          errText,
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        const SizedBox(height: kDefaultPadding),
+                      ],
+                    ),
+                  )
+                : const SizedBox(),
             Container(
               margin:
                   const EdgeInsets.symmetric(horizontal: 2 * kDefaultPadding),

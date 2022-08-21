@@ -12,11 +12,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem.snowball import SnowballStemmer
-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import os
-
+from googlesearch import search
+from GoogleNews import GoogleNews
 
 class ReportList(APIView):
     authentication_classes = [authentication.TokenAuthentication]
@@ -58,31 +55,8 @@ class AlertList(APIView):
         return Response(serializer.data)
 
 
-# webscraper function to find report search results
 def webscrape(town, incident):
-    # TODO fix this
-    os.environ['MOZ_HEADLESS'] = '1'
-    driver = webdriver.Firefox()
-
-    driver.get("https://www.google.com/")
-    driver.find_element_by_xpath('/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input').send_keys(town + ' ' + incident + Keys.ENTER)
-
-    driver.implicitly_wait(20)
-
-    allLinks = driver.find_elements_by_class_name('yuRUbf')
-    link1 = allLinks[0].find_element_by_tag_name("a")
-    link2 = allLinks[1].find_element_by_tag_name("a")
-    link3 = allLinks[2].find_element_by_tag_name("a")
-    href1 = link1.get_attribute("href")
-    href2 = link2.get_attribute("href")
-    href3 = link3.get_attribute("href")
-
-    driver.close()
-
-    print(href1, href2, href3)
-    print(allLinks)
-
-    return (href1, href2, href3)
+    return search(town + ' ' + incident, num_results=3, lang="en")
 
 # function to create csv datasets with search headlines for kmeans clustering
 def createData(filePath, headlines):
