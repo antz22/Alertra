@@ -35,7 +35,7 @@ class _CreateReportState extends State<CreateReport> {
 
   String? _address;
   String? selectedEmergencyType;
-  String? selectedUrgencyType;
+  String? selectedPriority;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -194,7 +194,7 @@ class _CreateReportState extends State<CreateReport> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      selectedUrgencyType = value.toString();
+                      selectedPriority = value.toString();
                     });
                   },
                 ),
