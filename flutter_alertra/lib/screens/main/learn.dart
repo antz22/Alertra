@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class News extends StatelessWidget {
-  const News({Key? key}) : super(key: key);
+class Learn extends StatelessWidget {
+  const Learn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class News extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: const [
-          Text('News')
+          Text('Learn')
         ],
       ),
     );

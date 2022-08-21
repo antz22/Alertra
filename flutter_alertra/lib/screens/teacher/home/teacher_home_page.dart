@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
 import 'package:flutter_alertra/screens/main/alert.dart';
 import 'package:flutter_alertra/screens/main/feed/feed.dart';
+import 'package:flutter_alertra/screens/main/learn.dart';
 import 'package:flutter_alertra/screens/main/news.dart';
 import 'package:flutter_alertra/widgets/page_button.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
@@ -59,6 +60,11 @@ class TeacherHomePage extends StatelessWidget {
                       text: "News",
                     ),
                   ),
+                  Tab(
+                    child: PageButton(
+                      text: "Learn",
+                    ),
+                  ),
                 ],
               ),
               const Divider(height: 16, thickness: 2),
@@ -68,6 +74,7 @@ class TeacherHomePage extends StatelessWidget {
                     const Feed(role: "Teacher"),
                     Alerts(),
                     const News(),
+                    const Learn(),
                   ],
                 ),
               ),
