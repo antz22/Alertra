@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
+import 'package:flutter_alertra/screens/login/login.dart';
 import 'package:flutter_alertra/screens/main/feed/create_report.dart';
 import 'package:flutter_alertra/screens/main/alert_info.dart';
 import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
@@ -93,7 +94,7 @@ class _FeedState extends State<Feed> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AlertInfo(),
+                              builder: (context) => AlertInfo(alert: alert),
                             ),
                           );
                         },
@@ -116,12 +117,12 @@ class _FeedState extends State<Feed> {
                               Icons.person,
                               color: Colors.black,
                             ),
-                            title: const Text(
-                              'Gamer causes lighting storm, dies instantly',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            title: Text(
+                              alert.headline,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: const Text(
-                                'Imposter on the run at 50 Fortnite drive, please take caution.'),
+                            subtitle: Text(alert.content),
                             trailing: const Text(
                               '11:21 am',
                               style: TextStyle(color: Colors.grey),
@@ -168,7 +169,7 @@ class _FeedState extends State<Feed> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => AlertInfo(),
+                                        builder: (context) => LoginScreen(),
                                       ),
                                     );
                                   },

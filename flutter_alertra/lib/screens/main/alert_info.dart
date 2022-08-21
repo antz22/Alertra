@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/constants/constants.dart';
+import 'package:flutter_alertra/models/alert.dart';
 
 class AlertInfo extends StatelessWidget {
-  const AlertInfo({Key? key}) : super(key: key);
+  const AlertInfo({
+    Key? key,
+    required this.alert,
+  }) : super(key: key);
+
+  final Alert alert;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +32,8 @@ class AlertInfo extends StatelessWidget {
             ),
             const SizedBox(height: 2 * kDefaultPadding),
             Row(
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'ALERT',
                   style: TextStyle(
                     fontSize: 20,
@@ -35,10 +41,10 @@ class AlertInfo extends StatelessWidget {
                     color: Colors.red,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
-                  '11:21am',
-                  style: TextStyle(
+                  alert.time.substring(0, 7),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
@@ -47,9 +53,9 @@ class AlertInfo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: kDefaultPadding * 0.5),
-            const Text(
-              'Gamer causes lighting storm, dies instantly',
-              style: TextStyle(
+            Text(
+              alert.headline,
+              style: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
@@ -100,10 +106,10 @@ class AlertInfo extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
-                        "High Urgency",
-                        style: TextStyle(
+                        "${alert.priority.toUpperCase()[0] + alert.priority.substring(1)} Urgency",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),
@@ -114,9 +120,9 @@ class AlertInfo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: kDefaultPadding * 1.2),
-            const Text(
-              "Anthoinzee, the thing, has spotted aZAMMMM and Suchiscrit eating ice cream in the cottage. Police are investigating why. Do not approach said targets.",
-              style: TextStyle(
+            Text(
+              alert.content,
+              style: const TextStyle(
                 fontSize: 18.0,
                 height: 1.5,
               ),
