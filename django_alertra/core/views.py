@@ -3,8 +3,8 @@ from rest_framework.decorators import api_view, authentication_classes,permissio
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Report, ReportSearchResult, ReportType, Alert, School, Source, KeyWord
-from .serializers import ReportSerializer, ReportTypeSerializer, AlertSerializer, UserDataSerializer, SchoolSerializer
+from .models import Report, ReportSearchResult, Alert, School, Source, KeyWord
+from .serializers import ReportSerializer, AlertSerializer, UserDataSerializer, SchoolSerializer
 
 import pandas as pd 
 from sklearn.feature_extraction import text
@@ -33,17 +33,6 @@ class SchoolList(APIView):
         schools = School.objects.all()
         serializer = SchoolSerializer(schools, many=True)
         return Response(serializer.data)
-
-
-class ReportTypeList(APIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get(self, request, format=None):
-        report_types = ReportType.objects.all()
-        serializer = ReportTypeSerializer(report_types, many=True)
-        return Response(serializer.data)
-
 
 class AlertList(APIView):
     authentication_classes = [authentication.TokenAuthentication]
@@ -147,16 +136,15 @@ def createReport(request):
         location = data['location']
         priority = data['priority']
         description = data['description']
-        report_type_name = data['report_type_name']
+        report_type = data['report_type']
         picture = data['picture']
-        report_type = ReportType.objects.get(name=report_type_name)
 
         new_report = Report.objects.create(user=user, description=description, location=location, priority=priority, school=school, report_type=report_type, picture=picture)
     except: 
         # if it doesn't it is an emergency report with only the report type and a default of high priority
         description = data['description']
-        report_type_name = data['report_type_name']
-        report_type = ReportType.objects.get(name=report_type_name)
+        report_type = data['report_type']
+        
         priority = 'high'
 
         new_report = Report.objects.create(user=user, report_type=report_type, priority=priority, school=school, description=description)
@@ -206,10 +194,11 @@ def createAlert(request):
     data = request.data
     user = request.user
 
-    head_line = data['headline']
+    headline = data['headline']
     content = data['content']
     recipient = data['recipient']
     priority = data['priority']
+    alert_type = data['alert_type']
     school = School.objects.get(name=user.school.name)
 
     try: 
@@ -217,24 +206,24 @@ def createAlert(request):
         report = Report.objects.get(id=report_id)
 
         if recipient == 'All':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Teacher', school=school, linked_report=report, priority=priority)
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Student', school=school, linked_report=report, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Teacher', school=school, linked_report=report, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Student', school=school, linked_report=report, priority=priority)
         elif recipient == 'Teachers':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Teacher', school=school, linked_report=report, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Teacher', school=school, linked_report=report, priority=priority)
         elif recipient == 'Students':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Student', school=school, linked_report=report, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Student', school=school, linked_report=report, priority=priority)
 
     except:
 
         # no linked report
 
         if recipient == 'All':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Teacher', school=school, priority=priority)
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Student', school=school, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Teacher', school=school, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Student', school=school, priority=priority)
         elif recipient == 'Teachers':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Teacher', school=school, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Teacher', school=school, priority=priority)
         elif recipient == 'Students':
-            new_alert = Alert.objects.create(user=user, head_line=head_line, content=content, recipient='Student', school=school, priority=priority)
+            new_alert = Alert.objects.create(user=user, headline=headline, content=content, alert_type=alert_type, recipient='Student', school=school, priority=priority)
 
 
 
