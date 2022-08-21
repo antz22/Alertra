@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocode/geocode.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class CreateReport extends StatefulWidget {
   CreateReport({
@@ -25,7 +27,7 @@ class _CreateReportState extends State<CreateReport> {
     'Missing Person',
   ];
 
-  final List<String> alertEmergencyItems = [
+  final List<String> emergencyPriority = [
     'Low',
     'Medium',
     'High',
@@ -34,6 +36,10 @@ class _CreateReportState extends State<CreateReport> {
   String? _address;
   String? selectedEmergencyType;
   String? selectedUrgencyType;
+
+  final ImagePicker _picker = ImagePicker();
+
+  late XFile? pickedImage = null;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +170,7 @@ class _CreateReportState extends State<CreateReport> {
               dropdownDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
               ),
-              items: alertEmergencyItems
+              items: emergencyPriority
                   .map(
                     (item) => DropdownMenuItem<String>(
                       value: item,
@@ -191,34 +197,62 @@ class _CreateReportState extends State<CreateReport> {
                 });
               },
             ),
-            ElevatedButton(
-              onPressed: () async {
-                LocationPermission permission;
-                permission = await Geolocator.requestPermission();
+            const SizedBox(
+              height: 20,
+            ),
+            const Text('Location'),
+            const SizedBox(height: 5),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  primary: Colors.white,
+                  onPrimary: Colors.black,
+                ),
+                onPressed: () async {
+                  LocationPermission permission;
+                  permission = await Geolocator.requestPermission();
 
-                Position position = await Geolocator.getCurrentPosition(
-                  desiredAccuracy: LocationAccuracy.high,
-                );
+                  Position position = await Geolocator.getCurrentPosition(
+                    desiredAccuracy: LocationAccuracy.high,
+                  );
 
-                // var altitude = position.altitude;
-                // var floor = position.floor;
-                // var latitude = position.latitude;
-                // var longitude = position.longitude;
+                  // var altitude = position.altitude;
+                  // var floor = position.floor;
+                  // var latitude = position.latitude;
+                  // var longitude = position.longitude;
 
-                GeoCode geoCode = GeoCode();
-                var address = await geoCode.reverseGeocoding(
-                    latitude: position.latitude, longitude: position.longitude);
+                  GeoCode geoCode = GeoCode();
+                  var address = await geoCode.reverseGeocoding(
+                      latitude: position.latitude,
+                      longitude: position.longitude);
 
-                var fullAddress =
-                    '${address.streetNumber} ${address.streetAddress}, ${address.city}, ${address.region}, ${address.postal}';
+                  var fullAddress =
+                      '${address.streetNumber} ${address.streetAddress}, ${address.city}, ${address.region}, ${address.postal}';
 
-                setState(() {
-                  _address = fullAddress;
-                });
-              },
-              child: const Text('Get current location'),
+                  setState(() {
+                    _address = fullAddress;
+                  });
+                },
+                child: const Text('Get current location'),
+              ),
             ),
             Text(_address != null ? _address! : "None"),
+            ElevatedButton(
+              onPressed: () async {
+                final XFile? image =
+                    await _picker.pickImage(source: ImageSource.gallery);
+
+                setState(() {
+                  pickedImage = image;
+                });
+              },
+              child: const Text("Pick Image"),
+            ),
+            pickedImage != null
+                ? Image.file(File(pickedImage!.path))
+                : const Text('No image selected.'),
           ],
         ),
       ),
