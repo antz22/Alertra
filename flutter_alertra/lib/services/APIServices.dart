@@ -55,22 +55,6 @@ class APIServices {
     return report;
   }
 
-  Future<List<String>> retrieveReportTypes() async {
-    var storage = const FlutterSecureStorage();
-    final token = await storage.read(key: 'restAPI');
-    final headers = {
-      "Content-Type": "application/json",
-      "Authorization": "Token " + token!
-    };
-    final url = Uri.parse(API_BASE_URL + '/api/v1/get-report-types/');
-    final response = await http.get(url, headers: headers);
-    List<dynamic> jsonData = json.decode(response.body);
-    List<String> data = jsonData.map((vals) {
-      return vals['name'].toString();
-    }).toList();
-    return data;
-  }
-
   Future<Map<String, dynamic>> retrieveSchoolInfo() async {
     var storage = const FlutterSecureStorage();
     final token = await storage.read(key: 'restAPI');
@@ -85,10 +69,14 @@ class APIServices {
   }
 
   Future<String> createReport(
-      String description,
-      String location,
       String priority,
-      String report_type_name,
+      String description,
+      String altitude,
+      String floor,
+      String latitude,
+      String longitude,
+      String address,
+      String reportType,
       String? filename,
       bool isEmergency) async {
     var storage = const FlutterSecureStorage();
@@ -101,9 +89,13 @@ class APIServices {
       final url = Uri.parse(API_BASE_URL + '/api/v1/create-report/');
       final body = json.encode({
         'priority': priority,
-        'report_type_name': report_type_name,
         'description': description,
-        'location': location,
+        'altitude': altitude,
+        'floor': floor,
+        'latitude': latitude,
+        'longitude': longitude,
+        'address': address,
+        'report_type': reportType,
       });
       try {
         await http.post(url, headers: headers, body: body);
@@ -116,10 +108,14 @@ class APIServices {
           'POST', Uri.parse(API_BASE_URL + '/api/v1/create-report/'));
       request.headers['Authorization'] = "Token " + token!;
       request.headers['Content-Type'] = "application/json";
-      request.fields['description'] = description;
-      request.fields['location'] = location;
       request.fields['priority'] = priority;
-      request.fields['report_type_name'] = report_type_name;
+      request.fields['description'] = description;
+      request.fields['altitude'] = altitude;
+      request.fields['floor'] = floor;
+      request.fields['latitude'] = latitude;
+      request.fields['longitude'] = longitude;
+      request.fields['address'] = address;
+      request.fields['report_type'] = reportType;
       if (filename != null) {
         request.files.add(
           await http.MultipartFile.fromPath(
@@ -133,8 +129,14 @@ class APIServices {
     }
   }
 
-  Future<String> createAlert(String recipients, String headline, String content,
-      String priority, Report? report) async {
+  Future<String> createAlert(
+    String recipients,
+    String headline,
+    String content,
+    String priority,
+    String alertType,
+    Report? report,
+  ) async {
     var storage = const FlutterSecureStorage();
     final token = await storage.read(key: 'restAPI');
     final headers = {
@@ -147,6 +149,7 @@ class APIServices {
             'recipient': recipients,
             'headline': headline,
             'content': content,
+            'alert_type': alertType,
             'priority': priority,
             'report_id': report.id,
           })
@@ -154,6 +157,7 @@ class APIServices {
             'recipient': recipients,
             'headline': headline,
             'content': content,
+            'alert_type': alertType,
             'priority': priority,
           });
     try {

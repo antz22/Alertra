@@ -5,7 +5,11 @@ class Report {
   final String time;
   final bool approved;
   final String description;
-  final String location;
+  final String altitude;
+  final String floor;
+  final String latitude;
+  final String longitude;
+  final String address;
   final String reportType;
   final String pictureUrl;
   final List searchResults;
@@ -17,8 +21,12 @@ class Report {
     required this.time,
     required this.approved,
     required this.description,
+    required this.altitude,
+    required this.floor,
+    required this.latitude,
+    required this.longitude,
+    required this.address,
     required this.searchResults,
-    this.location = '',
     this.reportType = '',
     this.pictureUrl = '',
   });
@@ -31,11 +39,15 @@ class Report {
       time: json['time'],
       approved: json['approved'],
       description: json['description'],
+      altitude: json['altitude'],
+      floor: json['floor'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      address: json['address'],
       searchResults: json['search_results'].map((result) {
         return result['url'];
       }).toList(),
-      location: json['location'] ?? '',
-      reportType: json['report_type_name'] ?? '',
+      reportType: json['report_type'] ?? '',
       pictureUrl: json['get_picture'] ?? '',
     );
   }

@@ -36,15 +36,19 @@ class User(AbstractUser):
 
 class Report(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reports')
-    description = models.CharField(max_length=128, null=True, blank=True)
-    location = models.CharField(max_length=64, null=True, blank=True)
-    report_type = models.CharField(max_length=64, null=True, blank=True)
     # low, medium, high
     priority = models.CharField(max_length=64, default='low')
-    picture = models.ImageField(upload_to='uploads/', null=True, blank=True)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     approved = models.BooleanField(default=False)
+    description = models.CharField(max_length=128, null=True, blank=True)
+    altitude = models.CharField(max_length=64, null=True, blank=True)
+    floor = models.CharField(max_length=64, null=True, blank=True)
+    latitude = models.CharField(max_length=64, null=True, blank=True)
+    longitude = models.CharField(max_length=64, null=True, blank=True)
+    address = models.CharField(max_length=64, null=True, blank=True)
+    report_type = models.CharField(max_length=64, null=True, blank=True)
+    picture = models.ImageField(upload_to='uploads/', null=True, blank=True)
 
     class Meta:
         ordering = ('-time',)
@@ -72,7 +76,7 @@ class Alert(models.Model):
     # low, medium, high
     priority = models.CharField(max_length=64, default='low')
     headline = models.CharField(max_length=64, null=True, blank=True)
-    content = models.CharField()
+    content = models.CharField(max_length=1000)
     alert_type = models.CharField(max_length=64, null=True, blank=True)
     # teacher, student, all
     recipient = models.CharField(max_length=64)
@@ -81,4 +85,4 @@ class Alert(models.Model):
     linked_report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.head_line}"
+        return f"{self.headline}"
