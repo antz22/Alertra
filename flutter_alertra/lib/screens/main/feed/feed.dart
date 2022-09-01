@@ -4,6 +4,7 @@ import 'package:flutter_alertra/screens/login/login.dart';
 import 'package:flutter_alertra/screens/main/feed/create_report.dart';
 import 'package:flutter_alertra/screens/main/alert_info.dart';
 import 'package:flutter_alertra/screens/teacher/home/teacher_home_page.dart';
+import 'package:flutter_alertra/widgets/custom_button2.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_alertra/services/APIServices.dart';
 import 'package:flutter_alertra/models/alert.dart';
@@ -222,33 +223,18 @@ class _FeedState extends State<Feed> {
                 )
               : const SizedBox(),
           const Spacer(),
-          Center(
-            child: ElevatedButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all<double>(3),
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+          CustomButton2(
+            color: Colors.blue,
+            text: 'Create Report',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateReport(),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateReport(),
-                  ),
-                );
-              },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                child: Text(
-                  'Create Report',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-              ),
-            ),
+              );
+              return "";
+            },
           ),
           const SizedBox(
             height: 20.0,

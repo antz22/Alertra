@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alertra/screens/main/settings/account.dart';
 import 'package:flutter_alertra/screens/main/settings/notifications.dart';
+import 'package:flutter_alertra/widgets/custom_button2.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatelessWidget {
@@ -67,6 +68,17 @@ class Settings extends StatelessWidget {
             _settingsCard(context, "Alertra on GitHub", null,
                 "https://github.com/antz22/Alertra"),
             const Divider(thickness: 1, color: Colors.grey, height: 0),
+            const Spacer(),
+            CustomButton2(
+              color: Colors.red,
+              text: "Sign Out",
+              onPressed: () {
+                return "";
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),

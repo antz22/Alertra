@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_alertra/widgets/custom_button2.dart';
 
 class Alerts extends StatefulWidget {
   Alerts({Key? key}) : super(key: key);
@@ -200,28 +201,12 @@ class _AlertsState extends State<Alerts> {
             },
           ),
           const Spacer(),
-          Center(
-            child: ElevatedButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all<double>(3),
-                backgroundColor: MaterialStateProperty.all(Colors.red),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              onPressed: () {
-                // send alert function
-              },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                child: Text(
-                  'Send Alert',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-              ),
-            ),
+          CustomButton2(
+            color: Colors.red,
+            text: "Send Alert",
+            onPressed: () {
+              return "";
+            },
           ),
           const SizedBox(
             height: 20.0,
