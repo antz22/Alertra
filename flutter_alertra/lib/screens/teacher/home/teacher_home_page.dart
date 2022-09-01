@@ -4,6 +4,7 @@ import 'package:flutter_alertra/screens/main/alert.dart';
 import 'package:flutter_alertra/screens/main/feed/feed.dart';
 import 'package:flutter_alertra/screens/main/learn.dart';
 import 'package:flutter_alertra/screens/main/news.dart';
+import 'package:flutter_alertra/screens/main/settings/settings.dart';
 import 'package:flutter_alertra/widgets/page_button.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
@@ -15,13 +16,32 @@ class TeacherHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEDF0F7),
       appBar: AppBar(
-        title: const Text(
-          'Alertra',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 26,
-          ),
+        title: Row(
+          children: [
+            const Text(
+              'Alertra',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 26,
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Settings(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.black,
+              ),
+            )
+          ],
         ),
         elevation: 0,
         backgroundColor: const Color(0xFFEDF0F7),
