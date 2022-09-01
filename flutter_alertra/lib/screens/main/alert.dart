@@ -203,23 +203,29 @@ class _AlertsState extends State<Alerts> {
           Center(
             child: ElevatedButton(
               style: ButtonStyle(
-                elevation: MaterialStateProperty.all<double>(0),
+                elevation: MaterialStateProperty.all<double>(3),
                 backgroundColor: MaterialStateProperty.all(Colors.red),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
               onPressed: () {
                 // send alert function
               },
               child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text('Send Alert',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                child: Text(
+                  'Send Alert',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
               ),
             ),
           ),
           const SizedBox(
             height: 20.0,
-          )
+          ),
         ],
       ),
     );

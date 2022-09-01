@@ -222,16 +222,36 @@ class _FeedState extends State<Feed> {
                 )
               : const SizedBox(),
           const Spacer(),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CreateReport(),
+          Center(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all<double>(3),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-              );
-            },
-            child: const Text('Create Report'),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateReport(),
+                  ),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                child: Text(
+                  'Create Report',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20.0,
           ),
         ],
       ),
